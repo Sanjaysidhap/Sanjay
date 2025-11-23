@@ -182,348 +182,131 @@
             opacity: 1;
             transform: translateX(0);
         }
-    </style>
+        </script>
+  <script src="script.js"></script>
 </head>
-<body class="bg-gradient-to-br from-purple-50 via-blue-50 to-cyan-50 min-h-screen">
-    <!-- Animated Background -->
-    <div class="fixed inset-0 -z-10 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-purple-400/10 via-blue-400/10 to-cyan-400/10 animate-gradient"></div>
-        <div class="absolute top-0 left-0 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"></div>
-        <div class="absolute top-0 right-0 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style="animation-delay: -2s;"></div>
-        <div class="absolute bottom-0 left-1/2 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style="animation-delay: -4s;"></div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="glass-effect shadow-xl">
+<body>
+    <nav class="bg-purple-800">
         <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div class="relative flex h-16 items-center justify-between">
-                <!-- Mobile Menu Button -->
-                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                    <button id="menu-button" type="button" class="inline-flex items-center p-2 text-gray-400 hover:bg-purple-700 hover:text-white focus:ring-2 focus:ring-white rounded-lg transition-all duration-300" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMenu()">
-                        <span class="sr-only">Open main menu</span>
-                        <svg id="menu-open-icon" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                        </svg>
-                        <svg id="menu-close-icon" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Logo and Navigation Links -->
-                <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-end">
-                    <div class="flex flex-1 items-center justify-center font-extrabold text-xl sm:text-2xl gradient-text">
-                        RVRJC Internal Calculator
-                    </div>
-                    <div class="hidden sm:ml-6 sm:block">
-                        <div class="flex space-x-4">
-                            <a href="index.html" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white rounded-xl transition-all duration-300 transform hover:-translate-y-1">Dashboard</a>
-                            <a href="internal.html" class="bg-gradient-to-r from-purple-600 to-blue-600 px-4 py-2 text-sm font-medium text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">Internals</a>
-                            <a href="sgpa.html" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white rounded-xl transition-all duration-300 transform hover:-translate-y-1">SGPA</a>
-                            <a href="cgpa.html" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white rounded-xl transition-all duration-300 transform hover:-translate-y-1">CGPA</a>
-                        </div>
-                    </div>
-                </div>
+          <div class="relative flex h-16 items-center justify-between">
+            
+            <!-- Mobile Menu Button -->
+            <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+              <button id="menu-button" type="button" class="inline-flex items-center p-2 text-gray-400 hover:bg-purple-700 hover:text-white focus:ring-2 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMenu()">
+                <span class="sr-only">Open main menu</span>
+                <svg id="menu-open-icon" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+                <svg id="menu-close-icon" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+              </button>
             </div>
+      
+            <!-- Logo and Navigation Links -->
+            <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-end">
+              <div class="flex text-white flex-1 text-[25px] items-center justify-center font-extrabold sm:items-stretch sm:justify-center">Rvrjc Internals</div>
+              <div class="hidden sm:ml-6 sm:block">
+                <div class="flex space-x-4">
+                  <a href="index.html" class="bg-purple-900 px-3 py-2 text-sm font-medium text-white rounded-md">Dashboard</a>
+                  <a href="internal.html" class="px-3 py-2 text-sm font-medium text-black-300 hover:bg-purple-700 hover:text-white rounded-md">Internals</a>
+                  <a href="sgpa.html" class="px-3 py-2 text-sm font-medium text-black-300 hover:bg-purple-700 hover:text-white rounded-md">SGPA</a>
+                  <a href="cgpa.html" class="px-3 py-2 text-sm font-medium text-black-300 hover:bg-purple-700 hover:text-white rounded-md">CGPA</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
+      
         <!-- Mobile Menu -->
         <div class="sm:hidden hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-2">
-                <a href="index.html" class="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white rounded-xl transition-all duration-300">Dashboard</a>
-                <a href="internal.html" class="block bg-gradient-to-r from-purple-600 to-blue-600 px-4 py-3 text-base font-medium text-white rounded-xl shadow-lg">Internals</a>
-                <a href="sgpa.html" class="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white rounded-xl transition-all duration-300">SGPA</a>
-                <a href="cgpa.html" class="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white rounded-xl transition-all duration-300">CGPA</a>
+          <div class="px-2 pt-2 pb-3 space-y-1">
+            <a href="index.html" class="block bg-purple-900 px-3 py-2 text-base font-medium text-white rounded-md">Dashboard</a>
+            <a href="internal.html" class="block px-3 py-2 text-base font-medium text-black-300 hover:bg-purple-700 hover:text-white rounded-md">Internals</a>
+            <a href="sgpa.html" class="block px-3 py-2 text-base font-medium text-black-300 hover:bg-purple-700 hover:text-white rounded-md">SGPA</a>
+            <a href="cgpa.html" class="block px-3 py-2 text-base font-medium text-black-300 hover:bg-purple-700 hover:text-white rounded-md">CGPA</a>
+          </div>
+        </div>
+      </nav>
+      <div class="absolute  inset-0 -z-10 transform-gpu overflow-hidden blur-3xl">
+        <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] 
+                     bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] 
+                     sm:w-[72.1875rem]" 
+             style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 
+                                       60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 
+                                       0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+        </div>
+        <div class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 
+                     bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] 
+                     sm:w-[72.1875rem]" 
+             style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 
+                                       60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 
+                                       0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
+        </div>
+      </div>
+    <div class="flex min-h-full  flex-col justify-center px-6 py-12 lg:px-8">
+      
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+          <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Internal Calculator </h2>
+        </div>
+      
+        <div class=" mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form class="space-y-6 " action="#" method="POST">
+            <div>
+              <label for="email" class="block text-sm/6 font-medium text-gray-900">Sectional marks 1</label>
+              <div class="mt-2">
+                <input id="sm1" name="number" type="number" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+              </div>
+              
             </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <div class="relative p-6 md:p-10">
-        <div class="sm:mx-auto sm:w-full sm:max-w-2xl">
-            <h2 class="mt-10 text-center text-4xl md:text-5xl font-bold tracking-tight gradient-text animate-pulse-slow">
-                Internal Marks Calculator
-            </h2>
-            <p class="mt-4 text-center text-lg text-gray-600 max-w-2xl mx-auto">
-                Enter your marks below to calculate your internal assessment score. All fields are required.
-            </p>
-        </div>
-
-        <!-- Form Container -->
-        <div class="mt-8 max-w-4xl mx-auto">
-            <div class="glass-effect rounded-3xl p-6 md:p-8 shadow-2xl">
-                <form class="space-y-6" onsubmit="event.preventDefault(); submitForm();">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Sectional Marks -->
-                        <div class="input-card rounded-2xl p-6">
-                            <label for="sm1" class="block text-lg font-bold text-gray-800 mb-4 flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path>
-                                </svg>
-                                Sectional Marks 1
-                            </label>
-                            <div class="mt-2">
-                                <input id="sm1" name="number" type="number" min="0" max="100" required class="block w-full rounded-xl border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all duration-300 bg-white/80">
-                            </div>
-                        </div>
-                        
-                        <div class="input-card rounded-2xl p-6">
-                            <label for="sm2" class="block text-lg font-bold text-gray-800 mb-4 flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path>
-                                </svg>
-                                Sectional Marks 2
-                            </label>
-                            <div class="mt-2">
-                                <input id="sm2" name="number" type="number" min="0" max="100" required class="block w-full rounded-xl border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all duration-300 bg-white/80">
-                            </div>
-                        </div>
-                        
-                        <!-- Assignment Marks -->
-                        <div class="input-card rounded-2xl p-6">
-                            <label for="as1" class="block text-lg font-bold text-gray-800 mb-4 flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
-                                </svg>
-                                Assignment Marks 1
-                            </label>
-                            <div class="mt-2">
-                                <input id="as1" name="number" type="number" min="0" max="100" required class="block w-full rounded-xl border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 bg-white/80">
-                            </div>
-                        </div>
-                        
-                        <div class="input-card rounded-2xl p-6">
-                            <label for="as2" class="block text-lg font-bold text-gray-800 mb-4 flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
-                                </svg>
-                                Assignment Marks 2
-                            </label>
-                            <div class="mt-2">
-                                <input id="as2" name="number" type="number" min="0" max="100" required class="block w-full rounded-xl border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 bg-white/80">
-                            </div>
-                        </div>
-                        
-                        <!-- Quiz Marks -->
-                        <div class="input-card rounded-2xl p-6">
-                            <label for="q1" class="block text-lg font-bold text-gray-800 mb-4 flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-cyan-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
-                                </svg>
-                                Quiz Marks 1
-                            </label>
-                            <div class="mt-2">
-                                <input id="q1" name="number" type="number" min="0" max="100" required class="block w-full rounded-xl border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-all duration-300 bg-white/80">
-                            </div>
-                        </div>
-                        
-                        <div class="input-card rounded-2xl p-6">
-                            <label for="q2" class="block text-lg font-bold text-gray-800 mb-4 flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-cyan-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
-                                </svg>
-                                Quiz Marks 2
-                            </label>
-                            <div class="mt-2">
-                                <input id="q2" name="number" type="number" min="0" max="100" required class="block w-full rounded-xl border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-all duration-300 bg-white/80">
-                            </div>
-                        </div>
-                        
-                        <!-- Attendance -->
-                        <div class="input-card rounded-2xl p-6 md:col-span-2">
-                            <label for="at" class="block text-lg font-bold text-gray-800 mb-4 flex items-center">
-                                <svg class="w-5 h-5 mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                </svg>
-                                Attendance
-                            </label>
-                            <div class="mt-2">
-                                <input id="at" name="number" type="number" min="0" max="100" required class="block w-full rounded-xl border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-300 bg-white/80">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Swipe Button -->
-                    <div class="mt-8">
-                        <div class="swipe-button" id="swipeButton">
-                            <div class="swipe-track">
-                                <span class="swipe-text swipe-start">Swipe to Calculate</span>
-                                <span class="swipe-text swipe-end">Calculating...</span>
-                            </div>
-                            <div class="swipe-handle" id="swipeHandle"></div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- Results Display -->
-        <div id="result" class="mt-8 max-w-4xl mx-auto hidden">
-            <div class="result-card rounded-3xl p-8 shadow-2xl">
-                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Your Internal Marks</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white/80 rounded-2xl p-6 text-center shadow-lg">
-                        <div class="text-4xl font-bold text-purple-600" id="totalMarks">0</div>
-                        <div class="text-gray-600 mt-2">Total Marks</div>
-                    </div>
-                    <div class="bg-white/80 rounded-2xl p-6 text-center shadow-lg">
-                        <div class="text-4xl font-bold text-blue-600" id="percentage">0%</div>
-                        <div class="text-gray-600 mt-2">Percentage</div>
-                    </div>
-                    <div class="bg-white/80 rounded-2xl p-6 text-center shadow-lg">
-                        <div class="text-4xl font-bold text-green-600" id="grade">-</div>
-                        <div class="text-gray-600 mt-2">Grade</div>
-                    </div>
+            <div class="flex gap-4   flex-col">
+                <label for="sec2" class="block text-sm/6 font-medium text-gray-900">Sectional marks 2</label>
+                <div class="mt-2">
+                  <input id="sm2" name="number" type="number"  required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
                 </div>
-                <div class="mt-6 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl p-6 text-center">
-                    <div class="text-xl font-bold">Performance Analysis</div>
-                    <div class="mt-2 text-lg" id="performanceText">Enter your marks to see performance analysis</div>
-                </div>
+                <div class="flex items-center justify-between ">
+                    <label for="ass1" class="block text-sm/6 font-medium text-gray-900">Assignment Marks 1</label>
+                  </div>
+                  <div class="mt-2">
+                    <input  name="number" type="number"  id="as1" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <label for="ass1" class="block text-sm/6 font-medium text-gray-900">Assignment Marks 2</label>
+                  </div>
+                  <div class="mt-2">
+                    <input  name="number" id="as2" type="number"  required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <label for="ass1" class="block text-sm/6 font-medium text-gray-900">Quiz Marks 1</label>
+                  </div>
+                  <div class="mt-2">
+                    <input id="q1" name="number" type="number"  required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <label for="ass1" class="block text-sm/6 font-medium text-gray-900">Quiz Marks 2</label>
+                  </div>
+                  <div class="mt-2">
+                    <input id="q2" name="number" type="number"  required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <label for="ass1" class="block text-sm/6 font-medium text-gray-900">Attandance</label>
+                  </div>
+                  <div class="mt-2">
+                    <input id="at" name="number" type="number"  required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
+                  </div>
+              </div>
+      
+            <div class="">
+              
             </div>
+      
+            <div>
+              <button type="submit" onclick="submitForm()" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Calculate</button>
+            </div>
+          </form>
+          <pre id="result" class="flex mt-10"></pre>
+    
         </div>
-    </div>
-
-    <script>
-        // Mobile menu toggle
-        function toggleMenu() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            const menuOpenIcon = document.getElementById('menu-open-icon');
-            const menuCloseIcon = document.getElementById('menu-close-icon');
-            
-            mobileMenu.classList.toggle('hidden');
-            menuOpenIcon.classList.toggle('hidden');
-            menuCloseIcon.classList.toggle('hidden');
-        }
-
-        // Swipe button functionality
-        const swipeButton = document.getElementById('swipeButton');
-        const swipeHandle = document.getElementById('swipeHandle');
-        let isDragging = false;
-        let startX = 0;
-        let currentX = 0;
-        const maxSwipeDistance = swipeButton.offsetWidth - 65;
-
-        swipeHandle.addEventListener('mousedown', startDrag);
-        swipeHandle.addEventListener('touchstart', startDrag);
-
-        document.addEventListener('mousemove', drag);
-        document.addEventListener('touchmove', drag);
-
-        document.addEventListener('mouseup', endDrag);
-        document.addEventListener('touchend', endDrag);
-
-        function startDrag(e) {
-            isDragging = true;
-            startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
-            currentX = parseInt(swipeHandle.style.left) || 5;
-            swipeHandle.style.cursor = 'grabbing';
-        }
-
-        function drag(e) {
-            if (!isDragging) return;
-            e.preventDefault();
-            
-            const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
-            const deltaX = clientX - startX;
-            let newX = currentX + deltaX;
-            
-            newX = Math.max(5, Math.min(newX, maxSwipeDistance));
-            swipeHandle.style.left = newX + 'px';
-            
-            const progress = (newX - 5) / maxSwipeDistance;
-            if (progress > 0.7) {
-                swipeButton.classList.add('active');
-            } else {
-                swipeButton.classList.remove('active');
-            }
-        }
-
-        function endDrag() {
-            if (!isDragging) return;
-            isDragging = false;
-            swipeHandle.style.cursor = 'grab';
-            
-            const currentLeft = parseInt(swipeHandle.style.left) || 5;
-            const progress = (currentLeft - 5) / maxSwipeDistance;
-            
-            if (progress > 0.7) {
-                swipeButton.classList.add('active');
-                submitForm();
-                setTimeout(() => {
-                    resetSwipe();
-                }, 2000);
-            } else {
-                resetSwipe();
-            }
-        }
-
-        function resetSwipe() {
-            swipeHandle.style.left = '5px';
-            swipeButton.classList.remove('active');
-        }
-
-        // Form submission and calculation
-        function submitForm() {
-            // Get all input values
-            const sm1 = parseFloat(document.getElementById('sm1').value) || 0;
-            const sm2 = parseFloat(document.getElementById('sm2').value) || 0;
-            const as1 = parseFloat(document.getElementById('as1').value) || 0;
-            const as2 = parseFloat(document.getElementById('as2').value) || 0;
-            const q1 = parseFloat(document.getElementById('q1').value) || 0;
-            const q2 = parseFloat(document.getElementById('q2').value) || 0;
-            const at = parseFloat(document.getElementById('at').value) || 0;
-            
-            // Calculate total marks (assuming equal weightage for all components)
-            const totalMarks = sm1 + sm2 + as1 + as2 + q1 + q2 + at;
-            const percentage = (totalMarks / 700 * 100).toFixed(2);
-            
-            // Determine grade
-            let grade = '';
-            let performanceText = '';
-            
-            if (percentage >= 90) {
-                grade = 'A+';
-                performanceText = 'Excellent! You are performing exceptionally well.';
-            } else if (percentage >= 80) {
-                grade = 'A';
-                performanceText = 'Very good! Keep up the great work.';
-            } else if (percentage >= 70) {
-                grade = 'B+';
-                performanceText = 'Good performance. There is room for improvement.';
-            } else if (percentage >= 60) {
-                grade = 'B';
-                performanceText = 'Satisfactory. Focus on improving your scores.';
-            } else if (percentage >= 50) {
-                grade = 'C';
-                performanceText = 'Needs improvement. Consider seeking additional help.';
-            } else {
-                grade = 'F';
-                performanceText = 'Poor performance. Immediate attention required.';
-            }
-            
-            // Display results
-            document.getElementById('totalMarks').textContent = totalMarks;
-            document.getElementById('percentage').textContent = percentage + '%';
-            document.getElementById('grade').textContent = grade;
-            document.getElementById('performanceText').textContent = performanceText;
-            
-            // Show result section with animation
-            const resultSection = document.getElementById('result');
-            resultSection.classList.remove('hidden');
-            resultSection.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Initialize with some sample values for demo
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set sample values for demonstration
-            document.getElementById('sm1').value = 85;
-            document.getElementById('sm2').value = 78;
-            document.getElementById('as1').value = 90;
-            document.getElementById('as2').value = 88;
-            document.getElementById('q1').value = 82;
-            document.getElementById('q2').value = 85;
-            document.getElementById('at').value = 95;
-        });
-    </script>
+      </div>
 </body>
-                                    </html>
+</html>
