@@ -2,197 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RVRJC Internal Calculator</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#7e22ce',
-                        secondary: '#3b82f6',
-                        accent: '#06b6d4',
-                        dark: '#1e1b4b',
-                        light: '#f8fafc'
-                    },
-                    animation: {
-                        'gradient': 'gradient 15s ease infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 3s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        gradient: {
-                            '0%, 100%': { 'background-position': '0% 50%' },
-                            '50%': { 'background-position': '100% 50%' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        }
-                    }
-                }
-            }
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { clifford: '#da373d' }
         }
-    </script>
-    <style>
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .input-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .input-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, #7e22ce, #3b82f6, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .result-card {
-            background: linear-gradient(135deg, rgba(126, 34, 206, 0.1), rgba(59, 130, 246, 0.1));
-            border: 1px solid rgba(126, 34, 206, 0.2);
-        }
-        
-        .swipe-button {
-            position: relative;
-            width: 100%;
-            height: 70px;
-            background: linear-gradient(135deg, #7e22ce, #3b82f6);
-            border-radius: 35px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(126, 34, 206, 0.4);
-        }
-
-        .swipe-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #06b6d4, #0ea5e9);
-            clip-path: circle(0% at 0% 50%);
-            transition: all 0.6s ease;
-            border-radius: 35px;
-        }
-
-        .swipe-track {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 30px;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-            z-index: 2;
-        }
-
-        .swipe-handle {
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            width: 60px;
-            height: 60px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            z-index: 3;
-            cursor: grab;
-        }
-
-        .swipe-handle:active {
-            cursor: grabbing;
-            transform: scale(0.95);
-        }
-
-        .swipe-handle::after {
-            content: '→';
-            font-size: 24px;
-            color: #7e22ce;
-            transition: all 0.4s ease;
-        }
-
-        .swipe-button.active::before {
-            clip-path: circle(150% at 0% 50%);
-        }
-
-        .swipe-button.active .swipe-handle {
-            left: calc(100% - 65px);
-            background: rgba(255, 255, 255, 0.95);
-        }
-
-        .swipe-button.active .swipe-handle::after {
-            transform: rotate(180deg);
-            content: '✓';
-            color: #06b6d4;
-            font-size: 20px;
-        }
-
-        .swipe-text {
-            position: absolute;
-            width: 100%;
-            text-align: center;
-            color: white;
-            font-weight: bold;
-            transition: all 0.4s ease;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .swipe-start {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .swipe-end {
-            opacity: 0;
-            transform: translateX(20px);
-        }
-
-        .swipe-button.active .swipe-start {
-            opacity: 0;
-            transform: translateX(-20px);
-        }
-
-        .swipe-button.active .swipe-end {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        </script>
+      }
+    }
+  </script>
   <script src="script.js"></script>
 </head>
 <body>
-    <nav class="bg-purple-800">
+    <nav class="bg-pink-900">
         <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
           <div class="relative flex h-16 items-center justify-between">
             
             <!-- Mobile Menu Button -->
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-              <button id="menu-button" type="button" class="inline-flex items-center p-2 text-gray-400 hover:bg-purple-700 hover:text-white focus:ring-2 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMenu()">
+              <button id="menu-button" type="button" class="inline-flex items-center p-2 text-black-400 hover:bg-pink-900 hover:text-white focus:ring-2 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMenu()">
                 <span class="sr-only">Open main menu</span>
                 <svg id="menu-open-icon" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -208,7 +38,7 @@
               <div class="flex text-white flex-1 text-[25px] items-center justify-center font-extrabold sm:items-stretch sm:justify-center">Rvrjc Internals</div>
               <div class="hidden sm:ml-6 sm:block">
                 <div class="flex space-x-4">
-                  <a href="index.html" class="bg-purple-900 px-3 py-2 text-sm font-medium text-white rounded-md">Dashboard</a>
+                  <a href="index.html" class="bg-pink-900 px-3 py-2 text-sm font-medium text-white rounded-md">Dashboard</a>
                   <a href="internal.html" class="px-3 py-2 text-sm font-medium text-black-300 hover:bg-purple-700 hover:text-white rounded-md">Internals</a>
                   <a href="sgpa.html" class="px-3 py-2 text-sm font-medium text-black-300 hover:bg-purple-700 hover:text-white rounded-md">SGPA</a>
                   <a href="cgpa.html" class="px-3 py-2 text-sm font-medium text-black-300 hover:bg-purple-700 hover:text-white rounded-md">CGPA</a>
@@ -221,7 +51,7 @@
         <!-- Mobile Menu -->
         <div class="sm:hidden hidden" id="mobile-menu">
           <div class="px-2 pt-2 pb-3 space-y-1">
-            <a href="index.html" class="block bg-purple-900 px-3 py-2 text-base font-medium text-white rounded-md">Dashboard</a>
+            <a href="index.html" class="block bg-pink-900 px-3 py-2 text-base font-medium text-white rounded-md">Dashboard</a>
             <a href="internal.html" class="block px-3 py-2 text-base font-medium text-black-300 hover:bg-purple-700 hover:text-white rounded-md">Internals</a>
             <a href="sgpa.html" class="block px-3 py-2 text-base font-medium text-black-300 hover:bg-purple-700 hover:text-white rounded-md">SGPA</a>
             <a href="cgpa.html" class="block px-3 py-2 text-base font-medium text-black-300 hover:bg-purple-700 hover:text-white rounded-md">CGPA</a>
@@ -253,43 +83,43 @@
         <div class=" mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form class="space-y-6 " action="#" method="POST">
             <div>
-              <label for="email" class="block text-sm/6 font-medium text-gray-900">Sectional marks 1</label>
+              <label for="email" class="block text-sm/6 font-medium text-black-900">Sectional marks 1</label>
               <div class="mt-2">
                 <input id="sm1" name="number" type="number" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
               </div>
               
             </div>
             <div class="flex gap-4   flex-col">
-                <label for="sec2" class="block text-sm/6 font-medium text-gray-900">Sectional marks 2</label>
+                <label for="sec2" class="block text-sm/6 font-medium text-black-900">Sectional marks 2</label>
                 <div class="mt-2">
                   <input id="sm2" name="number" type="number"  required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
                 </div>
                 <div class="flex items-center justify-between ">
-                    <label for="ass1" class="block text-sm/6 font-medium text-gray-900">Assignment Marks 1</label>
+                    <label for="ass1" class="block text-sm/6 font-medium text-black-900">Assignment Marks 1</label>
                   </div>
                   <div class="mt-2">
                     <input  name="number" type="number"  id="as1" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
                   </div>
                   <div class="flex items-center justify-between">
-                    <label for="ass1" class="block text-sm/6 font-medium text-gray-900">Assignment Marks 2</label>
+                    <label for="ass1" class="block text-sm/6 font-medium text-black-900">Assignment Marks 2</label>
                   </div>
                   <div class="mt-2">
                     <input  name="number" id="as2" type="number"  required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
                   </div>
                   <div class="flex items-center justify-between">
-                    <label for="ass1" class="block text-sm/6 font-medium text-gray-900">Quiz Marks 1</label>
+                    <label for="ass1" class="block text-sm/6 font-medium text-black-900">Quiz Marks 1</label>
                   </div>
                   <div class="mt-2">
                     <input id="q1" name="number" type="number"  required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
                   </div>
                   <div class="flex items-center justify-between">
-                    <label for="ass1" class="block text-sm/6 font-medium text-gray-900">Quiz Marks 2</label>
+                    <label for="ass1" class="block text-sm/6 font-medium text-black-900">Quiz Marks 2</label>
                   </div>
                   <div class="mt-2">
                     <input id="q2" name="number" type="number"  required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
                   </div>
                   <div class="flex items-center justify-between">
-                    <label for="ass1" class="block text-sm/6 font-medium text-gray-900">Attandance</label>
+                    <label for="ass1" class="block text-sm/6 font-medium text-black-900">Attandance</label>
                   </div>
                   <div class="mt-2">
                     <input id="at" name="number" type="number"  required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
