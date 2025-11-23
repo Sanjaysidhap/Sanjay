@@ -6,140 +6,441 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            theme: { extend: { colors: { clifford: '#da373d' } } }
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#8b5cf6',
+                        accent: '#06b6d4',
+                        dark: '#1e1b4b',
+                        light: '#f0f9ff'
+                    },
+                    animation: {
+                        'gradient': 'gradient 15s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        gradient: {
+                            '0%, 100%': { 'background-position': '0% 50%' },
+                            '50%': { 'background-position': '100% 50%' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
         }
     </script>
+    <style>
+        .swipe-button {
+            position: relative;
+            width: 100%;
+            height: 70px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 35px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .swipe-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #06b6d4, #0ea5e9);
+            clip-path: circle(0% at 0% 50%);
+            transition: all 0.6s ease;
+            border-radius: 35px;
+        }
+
+        .swipe-track {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            z-index: 2;
+        }
+
+        .swipe-handle {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 3;
+            cursor: grab;
+        }
+
+        .swipe-handle:active {
+            cursor: grabbing;
+            transform: scale(0.95);
+        }
+
+        .swipe-handle::after {
+            content: '→';
+            font-size: 24px;
+            color: #6366f1;
+            transition: all 0.4s ease;
+        }
+
+        .swipe-button.active::before {
+            clip-path: circle(150% at 0% 50%);
+        }
+
+        .swipe-button.active .swipe-handle {
+            left: calc(100% - 65px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .swipe-button.active .swipe-handle::after {
+            transform: rotate(180deg);
+            content: '✓';
+            color: #06b6d4;
+            font-size: 20px;
+        }
+
+        .swipe-text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .swipe-start {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .swipe-end {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+
+        .swipe-button.active .swipe-start {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .swipe-button.active .swipe-end {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .subject-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
-<body>
-    <nav class="bg-purple-800">
-        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-          <div class="relative flex h-16 items-center justify-between">
-            
-            <!-- Mobile Menu Button -->
-            <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-              <button id="menu-button" type="button" class="inline-flex items-center p-2 text-gray-400 hover:bg-purple-700 hover:text-white focus:ring-2 focus:ring-white" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMenu()">
-                <span class="sr-only">Open main menu</span>
-                <svg id="menu-open-icon" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
-                <svg id="menu-close-icon" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-      
-            <!-- Logo and Navigation Links -->
-            <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-end">
-              <div class="flex text-white flex-1 items-center text-[25px] justify-center font-extrabold sm:items-stretch sm:justify-center">Rvrjc R20 Semester Calculator</div>
-              <div class="hidden sm:ml-6 sm:block">
-                <div class="flex space-x-4">
-                  <a href="index.html" class="bg-gray-900 px-3 py-2 text-sm font-medium text-white rounded-md">Dashboard</a>
-                  <a href="internal.html" class="px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white rounded-md">Internals</a>
-                  <a href="sgpa.html" class="px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white rounded-md">SGPA</a>
-                  <a href="cgpa.html" class="px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white rounded-md">CGPA</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-        <!-- Mobile Menu -->
-        <div class="sm:hidden hidden" id="mobile-menu">
-          <div class="px-2 pt-2 pb-3 space-y-1">
-            <a href="index.html" class="block bg-gray-900 px-3 py-2 text-base font-medium text-white rounded-md">Dashboard</a>
-            <a href="internal.html" class="block px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white rounded-md">Internals</a>
-            <a href="sgpa.html" class="block px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white rounded-md">SGPA</a>
-            <a href="cgpa.html" class="block px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white rounded-md">CGPA</a>
-          </div>
-        </div>
-      </nav>
-      <div class="absolute inset-0 -z-10 transform-gpu overflow-hidden blur-3xl">
-        <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] 
-                     bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] 
-                     sm:w-[72.1875rem]" 
-             style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 
-                                       60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 
-                                       0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
-        </div>
-        <div class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 
-                     bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] 
-                     sm:w-[72.1875rem]" 
-             style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 
-                                       60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 
-                                       0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
-        </div>
-      </div>
-    <div class="p-10 "> 
-        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-            <h2 class="mt-10 text-center text-[40px] font-bold tracking-tight text-gray-900">SGPA Calculator </h2>
-          </div>
-    <form>  
-
-        <div  class="border-b border-gray-900/10 pb-12">
-            
-      
-            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div class="sm:col-span-3">
-                <label for="first-name" class="block text-[30px] font-medium text-black-900 font-bold ">Year</label>
-                <div class="mt-2">
-                 <select id="year" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
-                    <optgroup><option value="0">Select</option>
-                        <option value="1">1st Year</option>
-                        <option value="2">2nd Year</option>
-                        <option value="3">3rd Year</option>
-                        <option value="4">4th Year</option>
-                    </optgroup>
-                 </select>
-                </div>
-              </div>
-      
-              <div class="sm:col-span-3">
-                <label for="last-name" class="block text-[30px] font-medium text-gray-900">Semester</label>
-                <div class="mt-2">
-                    <select id="sem" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
-                        <optgroup>
-                            <option value="0">Select</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                        </optgroup>
-                     </select>
-                </div>
-              </div>
-            </div>
-          </div>
-          <form onsubmit="event.preventDefault(); generateSubjectInputs();">  
-            <div class="sm:col-span-3 ">
-                <label for="last-name" class="block text-[30px] font-medium text-gray-900">Branch</label>
-                <div class="mt-2">
-                    <select id="branch" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
-                        <optgroup>
-                            <option value="0">Select</option>
-                            <option value="csbs">CSBS</option>
-                            <option value="cse">CSE</option>
-                            <option value="csm">CSM</option>
-                            <option value="csd">CSD</option>
-                            <option value="cso">CSO</option>
-                            <option value="it">IT</option>
-                            <option value="ece">ECE</option>
-                            <option value="eee">EEE</option>
-                            <option value="chemical">CHEMICAL</option>
-                            <option value="civil">CIVIL</option>
-                            <option value="mech">MECH</option>
-                        </optgroup>
-                    </select>
-                </div>
-                <button  type="button" onclick="generateSubjectInputs()" class="bg-indigo-600 text-white py-2 px-4 rounded">Submit</button>
-            </div>
-        </form>
-        
-       
-            <!-- <button onclick="generateSubjectInputs()" class="bg-indigo-600 text-white py-2 px-4 rounded">Submit</button> -->
-        </div>
-
-        <div id="subjectInputs" class="mt-6 max-w-7xl mx-auto p-6 rounded-lg shadow-md space-y-4" ></div>
-        <div id="sgpaDisplay" class="mt-6 text-[40px] font-semibold text-gray-800 flex justify-center "></div>
+<body class="bg-gradient-to-br from-blue-50 via-purple-50 to-cyan-50 min-h-screen">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-400/10 via-purple-400/10 to-cyan-400/10 animate-gradient"></div>
+        <div class="absolute top-0 left-0 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"></div>
+        <div class="absolute top-0 right-0 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style="animation-delay: -2s;"></div>
+        <div class="absolute bottom-0 left-1/2 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style="animation-delay: -4s;"></div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Navigation -->
+    <nav class="glass-effect shadow-xl">
+        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div class="relative flex h-16 items-center justify-between">
+                <!-- Mobile Menu Button -->
+                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                    <button id="menu-button" type="button" class="inline-flex items-center p-2 text-gray-400 hover:bg-purple-700 hover:text-white focus:ring-2 focus:ring-white rounded-lg transition-all duration-300" aria-controls="mobile-menu" aria-expanded="false" onclick="toggleMenu()">
+                        <span class="sr-only">Open main menu</span>
+                        <svg id="menu-open-icon" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                        <svg id="menu-close-icon" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Logo and Navigation Links -->
+                <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-end">
+                    <div class="flex text-white flex-1 items-center text-[25px] justify-center font-extrabold sm:items-stretch sm:justify-center bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                        Rvrjc R20 Semester Calculator
+                    </div>
+                    <div class="hidden sm:ml-6 sm:block">
+                        <div class="flex space-x-4">
+                            <a href="index.html" class="bg-gradient-to-r from-purple-600 to-blue-600 px-4 py-2 text-sm font-medium text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">Dashboard</a>
+                            <a href="internal.html" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white rounded-xl transition-all duration-300 transform hover:-translate-y-1">Internals</a>
+                            <a href="sgpa.html" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white rounded-xl transition-all duration-300 transform hover:-translate-y-1">SGPA</a>
+                            <a href="cgpa.html" class="px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white rounded-xl transition-all duration-300 transform hover:-translate-y-1">CGPA</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="sm:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-2">
+                <a href="index.html" class="block bg-gradient-to-r from-purple-600 to-blue-600 px-4 py-3 text-base font-medium text-white rounded-xl shadow-lg">Dashboard</a>
+                <a href="internal.html" class="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white rounded-xl transition-all duration-300">Internals</a>
+                <a href="sgpa.html" class="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white rounded-xl transition-all duration-300">SGPA</a>
+                <a href="cgpa.html" class="block px-4 py-3 text-base font-medium text-gray-700 hover:bg-gradient-to-r hover:from-purple-500 hover:to-blue-500 hover:text-white rounded-xl transition-all duration-300">CGPA</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="relative p-6 md:p-10">
+        <div class="sm:mx-auto sm:w-full sm:max-w-2xl">
+            <h2 class="mt-10 text-center text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent animate-float">
+                SGPA Calculator
+            </h2>
+        </div>
+
+        <!-- Form Container -->
+        <div class="mt-8 max-w-4xl mx-auto">
+            <div class="glass-effect rounded-3xl p-8 shadow-2xl">
+                <form>
+                    <div class="border-b border-gray-200/30 pb-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <label for="year" class="block text-2xl font-bold text-gray-800 mb-4">Year</label>
+                                <select id="year" class="block w-full rounded-2xl border-0 py-4 px-4 text-gray-900 shadow-lg ring-1 ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all duration-300 bg-white/80">
+                                    <option value="0">Select Year</option>
+                                    <option value="1">1st Year</option>
+                                    <option value="2">2nd Year</option>
+                                    <option value="3">3rd Year</option>
+                                    <option value="4">4th Year</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="sem" class="block text-2xl font-bold text-gray-800 mb-4">Semester</label>
+                                <select id="sem" class="block w-full rounded-2xl border-0 py-4 px-4 text-gray-900 shadow-lg ring-1 ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all duration-300 bg-white/80">
+                                    <option value="0">Select Semester</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <label for="branch" class="block text-2xl font-bold text-gray-800 mb-4">Branch</label>
+                        <div class="flex flex-col md:flex-row gap-4 items-start md:items-end">
+                            <select id="branch" class="block w-full md:flex-1 rounded-2xl border-0 py-4 px-4 text-gray-900 shadow-lg ring-1 ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all duration-300 bg-white/80">
+                                <option value="0">Select Branch</option>
+                                <option value="csbs">CSBS</option>
+                                <option value="cse">CSE</option>
+                                <option value="csm">CSM</option>
+                                <option value="csd">CSD</option>
+                                <option value="cso">CSO</option>
+                                <option value="it">IT</option>
+                                <option value="ece">ECE</option>
+                                <option value="eee">EEE</option>
+                                <option value="chemical">CHEMICAL</option>
+                                <option value="civil">CIVIL</option>
+                                <option value="mech">MECH</option>
+                            </select>
+                            <button type="button" onclick="generateSubjectInputs()" class="w-full md:w-auto bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-4 px-8 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                                Generate Subjects
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Swipe Button Container -->
+        <div class="mt-12 max-w-2xl mx-auto">
+            <div class="glass-effect rounded-3xl p-8 shadow-2xl">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Calculate SGPA</h3>
+                <div class="swipe-button" id="swipeButton">
+                    <div class="swipe-track">
+                        <span class="swipe-text swipe-start">Swipe to Calculate SGPA</span>
+                        <span class="swipe-text swipe-end">Calculating...</span>
+                    </div>
+                    <div class="swipe-handle" id="swipeHandle"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subject Inputs -->
+        <div id="subjectInputs" class="mt-8 max-w-4xl mx-auto space-y-4"></div>
+
+        <!-- SGPA Display -->
+        <div id="sgpaDisplay" class="mt-8 text-center">
+            <div class="inline-block bg-gradient-to-r from-green-500 to-emerald-600 text-white text-4xl md:text-5xl font-bold py-6 px-12 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300">
+                SGPA: <span id="sgpaValue">0.00</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuOpenIcon = document.getElementById('menu-open-icon');
+            const menuCloseIcon = document.getElementById('menu-close-icon');
+            
+            mobileMenu.classList.toggle('hidden');
+            menuOpenIcon.classList.toggle('hidden');
+            menuCloseIcon.classList.toggle('hidden');
+        }
+
+        // Swipe button functionality
+        const swipeButton = document.getElementById('swipeButton');
+        const swipeHandle = document.getElementById('swipeHandle');
+        let isDragging = false;
+        let startX = 0;
+        let currentX = 0;
+        const maxSwipeDistance = 350 - 65;
+
+        swipeHandle.addEventListener('mousedown', startDrag);
+        swipeHandle.addEventListener('touchstart', startDrag);
+
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('touchmove', drag);
+
+        document.addEventListener('mouseup', endDrag);
+        document.addEventListener('touchend', endDrag);
+
+        function startDrag(e) {
+            isDragging = true;
+            startX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
+            currentX = parseInt(swipeHandle.style.left) || 5;
+            swipeHandle.style.cursor = 'grabbing';
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            
+            const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
+            const deltaX = clientX - startX;
+            let newX = currentX + deltaX;
+            
+            newX = Math.max(5, Math.min(newX, maxSwipeDistance));
+            swipeHandle.style.left = newX + 'px';
+            
+            const progress = (newX - 5) / maxSwipeDistance;
+            if (progress > 0.7) {
+                swipeButton.classList.add('active');
+            } else {
+                swipeButton.classList.remove('active');
+            }
+        }
+
+        function endDrag() {
+            if (!isDragging) return;
+            isDragging = false;
+            swipeHandle.style.cursor = 'grab';
+            
+            const currentLeft = parseInt(swipeHandle.style.left) || 5;
+            const progress = (currentLeft - 5) / maxSwipeDistance;
+            
+            if (progress > 0.7) {
+                swipeButton.classList.add('active');
+                calculateSGPA();
+                setTimeout(() => {
+                    resetSwipe();
+                }, 2000);
+            } else {
+                resetSwipe();
+            }
+        }
+
+        function resetSwipe() {
+            swipeHandle.style.left = '5px';
+            swipeButton.classList.remove('active');
+        }
+
+        // Generate subject inputs (placeholder function)
+        function generateSubjectInputs() {
+            const year = document.getElementById('year').value;
+            const sem = document.getElementById('sem').value;
+            const branch = document.getElementById('branch').value;
+            
+            if (year === '0' || sem === '0' || branch === '0') {
+                alert('Please select all options');
+                return;
+            }
+            
+            const container = document.getElementById('subjectInputs');
+            container.innerHTML = `
+                <div class="glass-effect rounded-2xl p-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Enter Your Grades</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        ${Array.from({length: 6}, (_, i) => `
+                            <div class="subject-card rounded-xl p-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Subject ${i + 1}</label>
+                                <select class="w-full rounded-lg border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-gray-200 focus:ring-2 focus:ring-purple-500 bg-white">
+                                    <option value="10">O (10)</option>
+                                    <option value="9">A+ (9)</option>
+                                    <option value="8">A (8)</option>
+                                    <option value="7">B+ (7)</option>
+                                    <option value="6">B (6)</option>
+                                    <option value="5">C (5)</option>
+                                    <option value="0">F (0)</option>
+                                </select>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Calculate SGPA (placeholder function)
+        function calculateSGPA() {
+            // Simulate calculation
+            const sgpa = (Math.random() * 4 + 6).toFixed(2);
+            document.getElementById('sgpaValue').textContent = sgpa;
+            
+            // Add celebration effect
+            const display = document.getElementById('sgpaDisplay');
+            display.classList.add('animate-pulse');
+            setTimeout(() => {
+                display.classList.remove('animate-pulse');
+            }, 1000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add some sample data for demo
+            setTimeout(() => {
+                generateSubjectInputs();
+            }, 1000);
+        });
+    </script>
 </body>
-</html>
+    </html>
+            
