@@ -26,8 +26,8 @@ function submitForm() {
 
     // Display the result in the result div
     var resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = "YOUR INTERNALS ARE: " + int;
-    console.log("REsult is :",int)
+    resultDiv.innerHTML = "Internals Are: " + int;
+    console.log("YOUR Result is :",int)
 }
 
 function resetForm() {
@@ -248,7 +248,7 @@ function generateSubjectInputs() {
         labDiv.classList.add("lab-input", "sm:col-span-3");
 
         const label = document.createElement("label");
-        label.classList.add("block", "text-[25px]", "font-medium", "text-gray-900");
+        label.classList.add("block", "text-[25px]", "font-medium", "text-pink-900");
         label.textContent = `Lab ${index + 1}`;
         labDiv.appendChild(label);
 
@@ -256,8 +256,8 @@ function generateSubjectInputs() {
         gradeSelect.id = `lab${index + 1}`;
         gradeSelect.classList.add(
             "block", "w-full", "rounded-md", "border-0", "py-1.5", 
-            "text-gray-900", "shadow-sm", "ring-1", "ring-inset", 
-            "ring-gray-300", "focus:ring-2", "focus:ring-indigo-600"
+            "text-pink-900", "shadow-sm", "ring-1", "ring-inset", 
+            "ring-pink-300", "focus:ring-2", "focus:ring-indigo-600"
         );
 
         Object.keys(gradeValues).forEach(grade => {
@@ -276,7 +276,7 @@ function generateSubjectInputs() {
     calculateButton.textContent = "Calculate SGPA";
     calculateButton.type = "button";
     calculateButton.classList.add(
-        "rounded-md", "bg-indigo-600", "px-3", "py-2", 
+        "rounded-md", "bg-darkpink-600", "px-3", "py-2", 
         "text-sm", "font-semibold", "text-white", "shadow-sm", 
         "hover:bg-indigo-500", "focus:ring-2", "focus:ring-indigo-600"
     );
@@ -351,11 +351,11 @@ function generateInputFields() {
   function validateInput(input) {
     const value = parseFloat(input.value);
     if (isNaN(value) || value < 0 || value > 10) {
-      input.classList.add('border-red-500');
-      input.classList.remove('border-gray-300');
+      input.classList.add('border-yellow-500');
+      input.classList.remove('border-pink-300');
     } else {
-      input.classList.remove('border-red-500');
-      input.classList.add('border-gray-300');
+      input.classList.remove('border-yellow-500');
+      input.classList.add('border-pink-300');
     }
   }
 
